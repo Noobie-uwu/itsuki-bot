@@ -48,11 +48,7 @@ from wbb import (
     BOT_USERNAME,
     MESSAGE_DUMP_CHAT,
     SUDOERS,
-    USERBOT_ID,
-    USERBOT_NAME,
-    USERBOT_USERNAME,
     app,
-    app2,
     arq,
 )
 from wbb.core.types import InlineQueryResultCachedDocument
@@ -114,7 +110,7 @@ async def inline_help_func(__HELP__):
         ),
         InlineQueryResultArticle(
             title="Github Repo",
-            description="Get Github Respository Of Bot.",
+            description="This bot is kang of @WilliamButcherBot.",
             input_message_content=InputTextMessageContent(
                 "https://github.com/thehamkercat/WilliamButcherBot"
             ),
@@ -135,20 +131,18 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[William✨](https://github.com/thehamkercat/WilliamButcherBot):**
 **MainBot:** `{bot_state}`
-**UserBot:** `{ubot_state}`
 **Python:** `{pyver.split()[0]}`
 **Pyrogram:** `{pyrover}`
 **MongoDB:** `{mongover}`
 **Platform:** `{sys.platform}`
-**Profiles:** [BOT](t.me/{BOT_USERNAME}) | [UBOT](t.me/{USERBOT_USERNAME})
+**Profiles:** [BOT](t.me/{BOT_USERNAME})
 """
     answers.append(
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://static2.aniimg.com/upload/20170515/414/c/d/7/cd7EEF.jpg",
+            thumb_url="https://telegra.ph/file/f3f66133a596093de0b94.jpg",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
