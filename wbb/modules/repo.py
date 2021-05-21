@@ -28,7 +28,7 @@ from wbb.core.decorators.errors import capture_err
 from wbb.utils.fetch import fetch
 
 __MODULE__ = "Repo"
-__HELP__ = "/repo - To Get My Github Repository Link " "And Support Group Link"
+__HELP__ = "/repo - Repository Link"
 
 
 @app.on_message(filters.command("repo") & ~filters.edited)
@@ -45,11 +45,7 @@ async def repo(_, message):
         )
         count += 1
 
-    text = f"""[Github](https://github.com/thehamkercat/WilliamButcherBot) | [Group](t.me/PatheticProgrammers)
-```----------------
-| Contributors |
-----------------```
-{list_of_users}"""
+    text = f"""This Bot use @WilliamButcherBot as it's base\n[Github](https://github.com/thehamkercat/WilliamButcherBot)"""
     await app.send_message(
         message.chat.id, text=text, disable_web_page_preview=True
     )
