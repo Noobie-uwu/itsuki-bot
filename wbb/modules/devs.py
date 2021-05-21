@@ -20,8 +20,13 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from wbb import SUDOERS, app
 
 __MODULE__ = "Devs"
-__HELP__ = "/eval - Execute Python Code\n/sh - Execute Shell Code"
-
+__HELP__ = """
+/eval - Execute Python Code
+/sh - Execute Shell Code
+/blacklist_chat [CHAT_ID] - Blacklist a chat.
+/whitelist_chat [CHAT_ID] - Whitelist a chat.
+/blacklisted - Show blacklisted chats.
+"""
 
 async def aexec(code, client, message):
     exec(
