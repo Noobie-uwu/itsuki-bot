@@ -34,17 +34,6 @@ __HELP__ = "/repo - Repository Link"
 @app.on_message(filters.command("repo") & ~filters.edited)
 @capture_err
 async def repo(_, message):
-    users = await fetch(
-        "https://api.github.com/repos/thehamkercat/williambutcherbot/contributors"
-    )
-    list_of_users = ""
-    count = 1
-    for user in users:
-        list_of_users += (
-            f"**{count}.** [{user['login']}]({user['html_url']})\n"
-        )
-        count += 1
-
     text = f"""This Bot use @WilliamButcherBot as it's base\n[Github](https://github.com/thehamkercat/WilliamButcherBot)"""
     await app.send_message(
         message.chat.id, text=text, disable_web_page_preview=True
