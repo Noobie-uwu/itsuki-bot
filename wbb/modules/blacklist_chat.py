@@ -6,18 +6,6 @@ from wbb.core.decorators.errors import capture_err
 from wbb.utils.dbfunctions import (blacklist_chat, blacklisted_chats,
                                    whitelist_chat)
 
-__MODULE__ = "Blacklist Chat"
-__HELP__ = """
-**THIS MODULE IS ONLY FOR DEVS**
-
-Use this module to make the bot leave some chats
-in which you don't want it to be in.
-
-/blacklist_chat [CHAT_ID] - Blacklist a chat.
-/whitelist_chat [CHAT_ID] - Whitelist a chat.
-/blacklisted - Show blacklisted chats.
-"""
-
 
 @app.on_message(filters.command("blacklist_chat") & filters.user(SUDOERS))
 @capture_err
