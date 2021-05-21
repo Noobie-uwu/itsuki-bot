@@ -30,8 +30,8 @@ async def get_user_info(user):
     is_sudo = user_id in SUDOERS
     karma = await user_global_karma(user_id)
     caption = f"""
+Info Results:
 ━━━━━━━━━━━━━━━━━━━
-
 •**ID:** `{user_id}`
 •**DC:** {dc_id}
 •**Name:** {first_name}
