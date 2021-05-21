@@ -29,7 +29,7 @@ import time
 import psutil
 from pyrogram import filters
 
-from wbb import (BOT_ID, GBAN_LOG_GROUP_ID, SUDOERS, USERBOT_USERNAME, app,
+from wbb import (BOT_ID, GBAN_LOG_GROUP_ID, SUDOERS, app,
                  bot_start_time)
 from wbb.core.decorators.errors import capture_err
 from wbb.utils import formatter
@@ -55,7 +55,6 @@ async def bot_sys_stats():
     disk = psutil.disk_usage("/").percent
     process = psutil.Process(os.getpid())
     stats = f"""
-{USERBOT_USERNAME}@William
 ------------------
 UPTIME: {formatter.get_readable_time((bot_uptime))}
 BOT: {round(process.memory_info()[0] / 1024 ** 2)} MB
@@ -102,7 +101,7 @@ async def ban_globally(_, message):
         else:
             served_chats = await get_served_chats()
             m = await message.reply_text(
-                f"**Initializing WBB Global Ban Sequence To Add Restrictions On {user.mention}**"
+                f"**Initializing Global Ban Sequence To Add Restrictions On {user.mention}**"
                 + f" **This Action Should Take About {len(served_chats)} Seconds.**"
             )
             await add_gban_user(user.id)
@@ -118,7 +117,7 @@ async def ban_globally(_, message):
                 await app.send_message(
                     user.id,
                     f"Hello, You have been globally banned by {from_user.mention},"
-                    + " You can appeal for this ban in @WBBSupport.",
+                    + " You can appeal for this ban in @quintessential_support.",
                 )
             except Exception:
                 pass
@@ -170,7 +169,7 @@ __**New Global Ban**__
         else:
             served_chats = await get_served_chats()
             m = await message.reply_text(
-                f"**Initializing WBB Global Ban Sequence To Add Restrictions On {mention}**"
+                f"**Initializing Global Ban Sequence To Add Restrictions On {mention}**"
                 + f" **This Action Should Take About {len(served_chats)} Seconds.**"
             )
             number_of_chats = 0
@@ -187,7 +186,7 @@ __**New Global Ban**__
                     user_id,
                     f"""
 Hello, You have been globally banned by {from_user_mention},
-You can appeal for this ban in @WBBSupport.""",
+You can appeal for this ban in @quintessential_support.""",
                 )
             except Exception:
                 pass
