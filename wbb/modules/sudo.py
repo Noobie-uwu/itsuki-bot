@@ -47,7 +47,7 @@ can even delete your account.
 
 
 @app.on_message(
-    filters.command("useradd", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS)
+    filters.command("useradd") & filters.user(SUDOERS)
 )
 @capture_err
 async def useradd(_, message: Message):
