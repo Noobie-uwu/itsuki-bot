@@ -24,7 +24,6 @@ async def get_user_info(user):
     mention = user.mention("Link")
     status = user.status
     dc_id = user.dc_id
-    bio_id = user.bio
     photo_id = user.photo.big_file_id if user.photo else None
     is_gbanned = await is_gbanned_user(user_id)
     is_sudo = user_id in SUDOERS
@@ -37,7 +36,6 @@ Info Results:
 •**Name:** {first_name}
 •**Username:** {("@" + username) if username else None}
 •**Permalink:** {mention}
-•**Bio:** {bio_id}
 •**Status:** {status}
 •**Sudo:** {is_sudo}
 •**Karma:** {karma}
