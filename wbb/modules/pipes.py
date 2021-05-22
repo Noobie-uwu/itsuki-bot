@@ -26,7 +26,7 @@ import asyncio
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import BOT_ID, SUDOERS, USERBOT_ID, app, app2
+from wbb import BOT_ID, SUDOERS, app
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.dbfunctions import (activate_pipe, deactivate_pipe,
                                    is_pipe_active, show_pipes)
@@ -39,11 +39,11 @@ __HELP__ = """
 Use this module to create a pipe that will forward messages of one chat/channel to another.
 
 
-/activate_pipe [FROM_CHAT_ID] [TO_CHAT_ID] [BOT|USERBOT]
+/activate_pipe [FROM_CHAT_ID] [TO_CHAT_ID] [BOT]
 
 Active a pipe.
 
-choose 'BOT' or 'USERBOT' according to your needs, this will decide
+according to your needs, this will decide
 which client will fetch the message from 'FROM_CHAT'.
 
 
@@ -57,14 +57,12 @@ Deactivete a pipe.
 Show all the active pipes.
 """
 pipes_list_bot = []
-pipes_list_userbot = []
 
 
 async def load_pipes():
     print("[INFO]: LOADING PIPES")
-    global pipes_list_bot, pipes_list_userbot
+    global pipes_list_bot
     pipes_list_bot = []
-    pipes_list_userbot = []
     pipes = await show_pipes()
     for pipe in pipes:
         if pipe["fetcher"] == "bot":
@@ -83,34 +81,6 @@ async def pipes_worker_bot(_, message: Message):
     for pipe in pipes_list_bot:
         if pipe["from_chat_id"] == message.chat.id:
             await message.forward(pipe["to_chat_id"])
-
-
-@app2.on_message(~filters.me, group=pipes_group)
-@capture_err
-async def pipes_worker_userbot(_, message: Message):
-    for pipe in pipes_list_userbot:
-        if pipe["from_chat_id"] == message.chat.id:
-            if not message.text:
-                m, temp = await asyncio.gather(
-                    app.listen(USERBOT_ID), message.copy(BOT_ID)
-                )
-                caption = f"Forwarded from `{pipe['from_chat_id']}`"
-                caption = (
-                    f"{temp.caption}\n\n{caption}" if temp.caption else caption
-                )
-                await app.copy_message(
-                    pipe["to_chat_id"],
-                    USERBOT_ID,
-                    m.message_id,
-                    caption=caption,
-                )
-                await asyncio.sleep(10)
-                await temp.delete()
-                return
-            caption = f"Forwarded from `{pipe['from_chat_id']}`"
-            await app.send_message(
-                pipe["to_chat_id"], text=message.text + "\n\n" + caption
-            )
 
 
 @app.on_message(filters.command("activate_pipe") & filters.user(SUDOERS))
