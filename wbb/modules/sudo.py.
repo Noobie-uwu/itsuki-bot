@@ -26,7 +26,7 @@ import os
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import BOT_ID, SUDOERS
+from wbb import BOT_ID, SUDOERS, app
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.dbfunctions import add_sudo, get_sudoers, remove_sudo
 
@@ -34,9 +34,9 @@ __MODULE__ = "Sudo"
 __HELP__ = """
 **THIS MODULE IS ONLY FOR DEVS**
 
-.useradd - To Add A User In Sudoers.
-.userdel - To Remove A User From Sudoers.
-.sudoers - To List Sudo Users.
+/useradd - To Add A User In Sudoers.
+/userdel - To Remove A User From Sudoers.
+/sudoers - To List Sudo Users.
 
 **NOTE:**
 
@@ -46,7 +46,7 @@ can even delete your account.
 """
 
 
-@app2.on_message(
+@app.on_message(
     filters.command("useradd", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS)
 )
 @capture_err
@@ -77,7 +77,7 @@ async def useradd(_, message: Message):
     await edit_or_reply(message, text="Something wrong happened, check logs.")
 
 
-@app2.on_message(
+@app.on_message(
     filters.command("userdel", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS)
 )
 @capture_err
@@ -103,7 +103,7 @@ async def userdel(_, message: Message):
     await edit_or_reply(message, text="Something wrong happened, check logs.")
 
 
-@app2.on_message(
+@app.on_message(
     filters.command("sudoers", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS)
 )
 @capture_err
