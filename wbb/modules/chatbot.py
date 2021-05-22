@@ -25,7 +25,6 @@ from pyrogram import filters
 
 from wbb import (BOT_ID, SUDOERS, app, arq)
 from wbb.core.decorators.errors import capture_err
-from wbb.modules.userbot import edit_or_reply
 from wbb.utils.filter_groups import chatbot_group
 
 __MODULE__ = "ChatBot"
