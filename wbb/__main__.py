@@ -38,6 +38,7 @@ loop = asyncio.get_event_loop()
 
 HELPABLE = {}
 
+Itsuki_img = "https://telegra.ph/file/fcd62d551e72a68142733.jpg"
 
 async def start_bot():
     global COMMANDS_COUNT
@@ -116,7 +117,7 @@ async def help_command(_, message):
         ]
     )
     await message.reply(
-        f"Hey there! My name is Itsuki Nakano. I can manage your group with lots of useful features, feel free to add me to your group.",
+        Itsuki_img, caption=f"Hey there! My name is Itsuki Nakano. I can manage your group with lots of useful features, feel free to add me to your group.",
         reply_markup=keyboard,
     )
 
